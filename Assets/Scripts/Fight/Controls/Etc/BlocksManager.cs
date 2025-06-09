@@ -20,9 +20,15 @@ public class BlocksManager : MonoBehaviour
         SceneManager.LoadScene(sceneIndex);
     }
 
+    void Awake()
+    {
+        this.counter.value = 51;
+    }
+
     void Update()
     {
         var blocksLeft = counter.value;
+        Debug.Log($"Blocks Left: {blocksLeft}");
         if (blocksLeft == 0)
         {
             LoadNextScene();

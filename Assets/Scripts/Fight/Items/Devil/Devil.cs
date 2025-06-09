@@ -5,8 +5,15 @@ public class Devil : MonoBehaviour
 {
     public float despawnTime = 5f; // Time in seconds before the Devil disappears if not collected
     public int damageAmount = 3; // The amount to increase AttackerBallPower by
+    private bool triggered;
+    public float fallSpeed = 3;
 
     private Coroutine despawnCoroutine; // Reference to control the despawn coroutine
+    
+    void FixedUpdate() {
+        // Make the Devil fall down at a constant speed
+        transform.Translate(Vector2.down * fallSpeed * Time.deltaTime);
+    }
 
     /// <summary>
     /// Starts the countdown timer for the Devil to disappear.
@@ -19,7 +26,7 @@ public class Devil : MonoBehaviour
         {
             StopCoroutine(despawnCoroutine);
         }
-        
+
         // Start the despawn countdown coroutine
         despawnCoroutine = StartCoroutine(DespawnRoutine());
         Debug.Log(gameObject.name + " despawn timer started. Will disappear in " + despawnTime + " seconds.");
@@ -42,10 +49,12 @@ public class Devil : MonoBehaviour
     {
         // Check if the colliding object is the Paddle
         // Assuming your Paddle GameObject has the tag "Paddle"
+        if(this.triggered == true) {
+            return;
+        }
         if (other.name == "Paddle")
         {
-            other.GetComponent<AttackerBallInitializer>().Point -= 1000; // Decrease the score of the Paddle
-            other.GetComponent<AttackerBallInitializer>().Bonus /= 2;
+
             Debug.Log("Paddle collected " + gameObject.name);
             Destroy(gameObject);
 
@@ -59,30 +68,14 @@ public class Devil : MonoBehaviour
             // 1. Find the AttackerBall object in the scene.
             //    It's crucial that there is only one AttackerBall, or you need a way to identify the correct one.
             GameObject attackerBallObject = GameObject.Find("AttackerBall"); // Assumes AttackerBall's name is exactly "AttackerBall"
-
-            if (attackerBallObject != null)
-            {
-                AttackerBallInitializer ballInitializer = attackerBallObject.GetComponent<AttackerBallInitializer>();
-
-                if (ballInitializer != null)
-                {
-                    // Decrease the AttackerBallPower by the specified amount
-                    if(ballInitializer.AttackerBallPower > 0) ballInitializer.AttackerBallPower -= damageAmount;
-                    if(ballInitializer.AttackerBallPower < 0) ballInitializer.AttackerBallPower = 1;
-                    Debug.Log($"AttackerBallPower decreased by {damageAmount}. New Power: {ballInitializer.AttackerBallPower}");
-                }
-                else
-                {
-                    Debug.LogWarning("AttackerBall object found, but it does not have 'AttackerBallInitializer.cs' script attached!");
-                }
-            }
-            else
-            {
-                Debug.LogWarning("AttackerBall object not found in the scene! Cannot apply Devil effect.");
-            }
-            // --- End of AttackerBall power update ---
-
+            if(this.triggered == false) attackerBallObject.GetComponent<AttackerBallInitializer>().Point -= 500; // Decrease the score of the Paddle
+            if(this.triggered == false) attackerBallObject.GetComponent<AttackerBallInitializer>().Bonus /= 2;
+            if(this.triggered == false) attackerBallObject.GetComponent<AttackerBallInitializer>().AttackerBallPower /= 2;
+            if(attackerBallObject.GetComponent<AttackerBallInitializer>().Bonus < 1) attackerBallObject.GetComponent<AttackerBallInitializer>().Bonus = 1;
+            if(attackerBallObject.GetComponent<AttackerBallInitializer>().AttackerBallPower < 1) attackerBallObject.GetComponent<AttackerBallInitializer>().AttackerBallPower = 1;
+            this.triggered = true;
             Destroy(gameObject); // Destroy the Devil GameObject upon collection
+            this.triggered = false;
         }
         else
         {

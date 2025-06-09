@@ -26,7 +26,7 @@ public class ManageBlockCollision_Boss : MonoBehaviour
             this.isHit = true;
             this.BallPower = collidedGameObject.GetComponent<AttackerBallInitializer>().AttackerBallPower;
             this.RemainingPower -= this.BallPower;
-            collidedGameObject.GetComponent<AttackerBallInitializer>().Point += 2000 * collidedGameObject.GetComponent<AttackerBallInitializer>().Bonus;    
+            collidedGameObject.GetComponent<AttackerBallInitializer>().Point += 7 * collidedGameObject.GetComponent<AttackerBallInitializer>().Bonus;    
             Debug.Log($"Remaining Power: {this.RemainingPower}");
             this.isHit = false; // Reset the flag after processing the hit   
         }

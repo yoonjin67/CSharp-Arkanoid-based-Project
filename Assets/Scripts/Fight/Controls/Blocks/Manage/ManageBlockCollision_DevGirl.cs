@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ManageBlockCollision_DevGirl : MonoBehaviour
 {
-    private int RemainingPower = 20;
+    private int RemainingPower = 6;
     public AudioClip physicalHitSound;
     private int BallPower = 3;
     public SharedIntVariable counter;
@@ -23,7 +23,7 @@ public class ManageBlockCollision_DevGirl : MonoBehaviour
         {
             this.isHit = true;
             this.BallPower = collidedGameObject.GetComponent<AttackerBallInitializer>().AttackerBallPower;
-            collidedGameObject.GetComponent<AttackerBallInitializer>().Point += 2000 * collidedGameObject.GetComponent<AttackerBallInitializer>().Bonus;    
+            collidedGameObject.GetComponent<AttackerBallInitializer>().Point += 6 * collidedGameObject.GetComponent<AttackerBallInitializer>().Bonus;    
             this.RemainingPower -= this.BallPower;
             Debug.Log($"Remaining Power: {this.RemainingPower}");   
             this.isHit = false; // Reset the flag after processing the hit   

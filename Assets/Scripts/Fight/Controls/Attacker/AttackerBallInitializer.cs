@@ -66,7 +66,7 @@ public class AttackerBallInitializer : MonoBehaviour
     {
         if (infoLabel != null)
         {
-            infoLabel.text = $"<b><color=yellow>Point:</color></b> {Point:N0}";
+            infoLabel.text = $"<b><color=yellow>Point:</color></b> {Point:N0} <b><color=green> BallPower:</color></b> {AttackerBallPower:N0}\n<b><color=red> Bonus: </color></b> x{Bonus}";
         }
     }
 }

@@ -33,6 +33,7 @@ public class DevilSpawner : MonoBehaviour
         if (devilPrefab != null)
         {
             // Determine the actual spawn position
+            spawnPoint = new Vector3(Random.Range(-2.0f, 2.0f), Random.Range(-2.0f, 2.0f), 0); // Random spawn point within a range
             Vector3 actualSpawnPos = spawnPoint;
             
             // Instantiate the Devil
