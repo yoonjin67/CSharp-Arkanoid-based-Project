@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/NormalFightScene.unity
     guid: 8a672b68ad5344aa7aba240908e1cebb
   - enabled: 1
+    path: Assets/Clear Scene 1.unity
+    guid: f40b4f66a7d4c45ccb3d734d7f4a31fc
+  - enabled: 1
     path: Assets/BossFightScene.unity
     guid: b8e42bed00beb4846a642b433b2efb12
   - enabled: 1

@@ -3,6 +3,10 @@ using TMPro;
 
 public class AttackerBallInitializer : MonoBehaviour
 {
+
+    // highscore should be properly delivered to clear scene.
+    public SharedIntVariable highscore;
+
     float POW(float v) {
         return v * v;
     } // no need to import Mathf for this
@@ -22,6 +26,9 @@ public class AttackerBallInitializer : MonoBehaviour
 
     void Start()
     {
+        if(highscore.value != 0) {
+            Point = highscore.value;
+        }
         rb = GetComponent<Rigidbody2D>();
         if (rb == null)
         {
@@ -67,6 +74,7 @@ public class AttackerBallInitializer : MonoBehaviour
         if (infoLabel != null)
         {
             infoLabel.text = $"<b><color=yellow>Point:</color></b> {Point:N0} <b><color=green> BallPower:</color></b> {AttackerBallPower:N0}\n<b><color=red> Bonus: </color></b> x{Bonus}";
+            highscore.value = Point;
         }
     }
 }

@@ -284,6 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b49264fd7f740a4af622592b915175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highscore: {fileID: 11400000, guid: b3f5372d0ce434d07b6ed1772ac75ecf, type: 2}
   upwardForce: 5
   Point: 0
   Bonus: 1
